@@ -50,10 +50,8 @@ public class SellerDaoJDBC implements EntitiesDao<Seller> {
 			st.setInt(1, id);
 			rs = st.executeQuery();
 			if(rs.next()) {
-				Department dp = new Department();
-				dp.setId(rs.getInt("DepartmentId"));
-				dp.setName(rs.getString("DepName"));
-				Seller seller = new Seller(rs.getInt("Id"), rs.getString("Name"), rs.getString("Email"), rs.getDate("BirthDate"), rs.getDouble("BaseSalary"), dp);
+				Department dp = instatiateDepartment(rs);
+				Seller seller = instatiateSeller(rs, dp);
 				return seller;
 			}			
 
@@ -68,6 +66,15 @@ public class SellerDaoJDBC implements EntitiesDao<Seller> {
 		}
 		
 		return null;
+	}
+	
+	private Department instatiateDepartment(ResultSet rs) throws SQLException {
+		return new Department(rs.getInt("DepartmentId"),rs.getString("DepName"));
+	}
+	
+	private Seller instatiateSeller(ResultSet rs, Department dp) throws SQLException {
+		return new Seller(rs.getInt("Id"), rs.getString("Name"), rs.getString("Email"), rs.getDate("BirthDate"), rs.getDouble("BaseSalary"), dp);
+
 	}
 
 	@Override
