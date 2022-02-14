@@ -1,6 +1,7 @@
 package application;
 
 import java.util.Date;
+import java.util.List;
 
 import model.dao.DaoFactory;
 import model.dao.EntitiesDao;
@@ -12,8 +13,15 @@ public class Program {
 
 	public static void main(String[] args) {
 		
+		Department dp = new Department(2, "books");
+		
+		
 		EntitiesDao<Seller> sellerDao = DaoFactory.createSellerDao();
-		Seller seller = sellerDao.findById(3);
+
+		List<Seller> sellers = sellerDao.findByDepartment(dp);
+		for(Seller seller:sellers) {
+			System.out.println(seller);
+		}
 		
 		
 		
