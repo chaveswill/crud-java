@@ -92,15 +92,11 @@ public class SellerDaoJDBC implements EntitiesDao<Seller> {
 				"delete from seller where Id = ?"
 			);
 			st.setInt(1, id);
-			int rowsAffected = st.executeUpdate();
-			if(rowsAffected>0) {
-				System.out.println("Delete succefully.");
-			}else {
-				throw new DbException("Delete error: This id don't exist on database");
-			}
+			st.executeUpdate();
+			
 					
 		} catch (SQLException e) {
-			throw new DbException(e.getMessage());
+			throw new DbException("Delete error: "+e.getMessage());
 		} finally {
 			DB.closeStatement(st);
 		}
