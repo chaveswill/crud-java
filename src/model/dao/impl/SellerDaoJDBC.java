@@ -61,13 +61,49 @@ public class SellerDaoJDBC implements EntitiesDao<Seller> {
 	}
 
 	@Override
-	public void update(Seller obj) {
-		// TODO Auto-generated method stub
+	public void update(Seller seller) {
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement(
+					"update seller set Name = ?, Email = ?, BirthDate = ?, "
+					+"BaseSalary = ?, DepartmentId = ? where Id = ?"
+					);
+			st.setString(1, seller.getName());
+			st.setString(2, seller.getEmail());
+			st.setDate(3, new java.sql.Date(seller.getBirthDate().getTime()));
+			st.setDouble(4, seller.getBaseSalary());
+			st.setInt(5, seller.getDepartment().getId());
+			st.setInt(6, seller.getId());
+			st.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		} finally {
+			DB.closeStatement(st);
+		}
 
 	}
 
 	@Override
 	public void deleteById(Integer id) {
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement(
+				"delete from seller where Id = ?"
+			);
+			st.setInt(1, id);
+			int rowsAffected = st.executeUpdate();
+			if(rowsAffected>0) {
+				System.out.println("Delete succefully.");
+			}else {
+				throw new DbException("Delete error: This id don't exist on database");
+			}
+					
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		} finally {
+			DB.closeStatement(st);
+		}
 	
 	}
 

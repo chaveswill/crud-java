@@ -5,7 +5,6 @@ import java.util.List;
 
 import model.dao.DaoFactory;
 import model.dao.EntitiesDao;
-import model.dao.impl.SellerDaoJDBC;
 import model.entities.Department;
 import model.entities.Seller;
 
@@ -31,10 +30,9 @@ public class Program {
 		
 		
 		System.out.println("=====================");
+
 		
-		Seller peter = new Seller(null, "Peter Silver", "peter@email.com", new Date(), 3500.00, dp);
-		sellerDao.insert(peter);
-		
+		sellerDao.deleteById(8);
 		
 		System.out.println("=====================");
 		sellers = sellerDao.findAll();
