@@ -11,7 +11,6 @@
 <p>
 <img src = "https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white">
 <img src = "https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white">
-<img src = "https://img.shields.io/github/stars/chaveswill/crud-java?style=for-the-badge">
 <img src = "https://img.shields.io/github/issues/chaveswill/crud-java?style=for-the-badge">
 </p>
 
